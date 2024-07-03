@@ -1,8 +1,9 @@
 services:
   postgres:
     image: postgres:15
+    user: root
     restart: unless-stopped
-    container_name: truco2-api-postgres
+    container_name: truco2-postgres
     environment:
       POSTGRES_PASSWORD: truco123
     volumes:
@@ -14,19 +15,20 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
+    user: root
     restart: unless-stopped
-    container_name: truco2-api-pgadmin
+    container_name: truco2-pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: truco2.user@ufam.com.br
       PGADMIN_DEFAULT_PASSWORD: truco123
-    ports:
-      - "16543:80"
     volumes:
       - ./pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
     networks:
       - appnet
+    ports:
+      - "16543:80"
 
 networks:
   appnet:
