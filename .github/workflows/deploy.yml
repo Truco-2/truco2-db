@@ -19,4 +19,4 @@ jobs:
           script: |
             cd /home/dev/truco2-db/
             git pull origin main
-            docker compose up -d --build
+            DB_PORT="${{ vars.DB_PORT }}" DB_PASSWORD="${{ secrets.DB_PASSWORD }}" PGADMIN_PORT="${{ vars.PGADMIN_PORT }}" PGADMIN_PASSWORD="${{ secrets.PGADMIN_PASSWORD }}" docker compose up -d --build
